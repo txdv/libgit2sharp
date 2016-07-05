@@ -306,6 +306,7 @@ namespace LibGit2Sharp
         /// </param>
         public static string UserAgent
         {
+            get { return Proxy.git_libgit2_opts_get_user_agent(); }
             set { Proxy.git_libgit2_opts_set_user_agent(value); }
         }
     }

@@ -3331,6 +3331,9 @@ namespace LibGit2Sharp.Core
             SetTemplatePath,       // GIT_OPT_SET_TEMPLATE_PATH
             SetSslCertLocations,   // GIT_OPT_SET_SSL_CERT_LOCATIONS
             SetUserAgent,          // GIT_OPT_SET_USER_AGENT
+            EnableStrictObjectCreation, // GIT_OPT_ENABLE_STRICT_OBJECT_CREATION
+            SetSslCiphers,         // GIT_OPT_SET_SSL_CIPHERS
+            GetUserAgent,          // GIT_OPT_GET_USER_AGENT
         }
 
         /// <summary>
@@ -3380,6 +3383,24 @@ namespace LibGit2Sharp.Core
         {
             var res = NativeMethods.git_libgit2_opts((int)LibGitOption.SetUserAgent, userAgent);
             Ensure.ZeroResult(res);
+        }
+
+        /// <summary>
+        /// Get the user agent which libgit2 will use in http requests.
+        /// </summary>
+        /// <param name="userAgent">
+        ///     The user agent string which will be used in http requests..
+        ///     Pass null to reset the search path to the default.
+        /// </param>
+        public static string git_libgit2_opts_get_user_agent()
+        {
+            using (var buf = new GitBuf())
+            {
+                var res = NativeMethods.git_libgit2_opts((int)LibGitOption.GetUserAgent, buf);
+                Ensure.ZeroResult(res);
+
+                return LaxUtf8Marshaler.FromNative(buf.ptr) ?? string.Empty;
+            }
         }
 
         #endregion
