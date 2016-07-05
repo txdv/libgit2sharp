@@ -654,6 +654,9 @@ namespace LibGit2Sharp.Core
         internal static extern int git_libgit2_opts(int option,
             [MarshalAs(UnmanagedType.CustomMarshaler, MarshalCookie = UniqueId.UniqueIdentifier, MarshalTypeRef = typeof(StrictUtf8Marshaler))]string path);
 
+        [DllImport(libgit2, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int git_libgit2_opts(int option, GitBuf buf);
+
         #endregion
 
         [DllImport(libgit2)]

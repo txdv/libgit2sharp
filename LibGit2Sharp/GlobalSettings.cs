@@ -313,5 +313,16 @@ namespace LibGit2Sharp
         {
             Proxy.git_libgit2_opts_set_user_agent(userAgent);
         }
+
+        /// <summary>
+        /// Get the user agent which libgit2 will use in http requests.
+        ///
+        /// <seealso cref="RepositoryOptions"/>.
+        /// </summary>
+        /// <returns>The paths that are searched</returns>
+        public static string GetUserAgent()
+        {
+            return Proxy.git_libgit2_opts_get_user_agent();
+        }
     }
 }
