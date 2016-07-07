@@ -302,16 +302,11 @@ namespace LibGit2Sharp
 
         /// <summary>
         /// Set the user agent which libgit2 will use in http requests.
-        ///
-        /// <seealso cref="RepositoryOptions"/>.
-        /// </summary>
-        /// <param name="paths">
-        ///     The user agent string which will be used in http requests..
-        ///     Pass null to reset to the default.
+        /// Pass null to reset to the default.
         /// </param>
-        public static void SetUserAgent(string userAgent)
+        public static string UserAgent
         {
-            Proxy.git_libgit2_opts_set_user_agent(userAgent);
+            set { Proxy.git_libgit2_opts_set_user_agent(value); }
         }
     }
 }
