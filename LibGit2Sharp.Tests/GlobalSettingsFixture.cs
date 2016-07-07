@@ -57,6 +57,14 @@ namespace LibGit2Sharp.Tests
         }
 
         [Fact]
+        public void CanSetAndGetUserAgent()
+        {
+            string userAgent = "super duper git";
+            GlobalSettings.UserAgent = userAgent;
+            Assert.Equal(userAgent, GlobalSettings.UserAgent);
+        }
+
+        [Fact]
         public void TryingToResetNativeLibraryPathAfterLoadedThrows()
         {
             // Do something that loads the native library
