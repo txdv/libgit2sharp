@@ -45,6 +45,20 @@ namespace LibGit2Sharp
         /// <summary>
         /// Initializes a new instance of the <see cref="Signature"/> class.
         /// </summary>
+        /// <param name="name">The formatted signature.</param>
+        public unsafe Signature(string signature)
+        {
+            using (SignatureHandle sigHandle = Proxy.git_signature_from_buffer(signature)) {
+                git_signature* sig = sigHandle;
+                name = LaxUtf8Marshaler.FromNative(sig->name);
+                email = LaxUtf8Marshaler.FromNative(sig->email);
+                when = Epoch.ToDateTimeOffset(sig->when.time, sig->when.offset);
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Signature"/> class.
+        /// </summary>
         /// <param name="identity">The identity.</param>
         /// <param name="when">The when.</param>
         public Signature(Identity identity, DateTimeOffset when)

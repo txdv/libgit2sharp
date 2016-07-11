@@ -2807,6 +2807,15 @@ namespace LibGit2Sharp.Core
             return new SignatureHandle(ptr, true);
         }
 
+        public static unsafe SignatureHandle git_signature_from_buffer(string buffer)
+        {
+            git_signature* ptr;
+            int res = NativeMethods.git_signature_from_buffer(out ptr, buffer);
+            Ensure.ZeroResult(res);
+
+            return new SignatureHandle(ptr, true);
+        }
+
         public static unsafe git_signature* git_signature_dup(git_signature* sig)
         {
             git_signature* handle;
