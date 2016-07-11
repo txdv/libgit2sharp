@@ -138,14 +138,6 @@ namespace LibGit2Sharp.Core
             IntPtr stream);
 
         [DllImport(libgit2)]
-        internal static extern unsafe int git_blob_create_fromchunks(
-            ref GitOid oid,
-            git_repository* repositoryPtr,
-            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalCookie = UniqueId.UniqueIdentifier, MarshalTypeRef = typeof(StrictFilePathMarshaler))] FilePath hintpath,
-            source_callback fileCallback,
-            IntPtr data);
-
-        [DllImport(libgit2)]
         internal static extern unsafe int git_blob_filtered_content(
             GitBuf buf,
             git_object* blob,
