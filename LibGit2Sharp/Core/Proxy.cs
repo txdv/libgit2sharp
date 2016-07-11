@@ -2149,13 +2149,13 @@ namespace LibGit2Sharp.Core
             return new RemoteHandle(handle, true);
         }
 
-        public static unsafe void git_remote_connect(RemoteHandle remote, GitDirection direction, ref GitRemoteCallbacks remoteCallbacks)
+        public static unsafe void git_remote_connect(RemoteHandle remote, GitDirection direction, ref GitProxyOptions proxyOptions, ref GitRemoteCallbacks remoteCallbacks)
         {
             GitStrArrayManaged customHeaders = new GitStrArrayManaged();
 
             try
             {
-                int res = NativeMethods.git_remote_connect(remote, direction, ref remoteCallbacks, ref customHeaders.Array);
+                int res = NativeMethods.git_remote_connect(remote, direction, ref remoteCallbacks, ref proxyOptions, ref customHeaders.Array);
                 Ensure.ZeroResult(res);
             }
             catch (Exception)

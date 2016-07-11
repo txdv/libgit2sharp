@@ -125,7 +125,8 @@ namespace LibGit2Sharp
                     gitCallbacks = callbacks.GenerateCallbacks();
                 }
 
-                Proxy.git_remote_connect(remoteHandle, GitDirection.Fetch, ref gitCallbacks);
+                GitProxyOptions proxyOptions = new GitProxyOptions() { Version = 1, Type = ProxyTypes.None };
+                Proxy.git_remote_connect(remoteHandle, GitDirection.Fetch, ref proxyOptions, ref gitCallbacks);
                 return Proxy.git_remote_ls(repository, remoteHandle);
             }
         }
@@ -469,6 +470,7 @@ namespace LibGit2Sharp
                                       {
                                           PackbuilderDegreeOfParallelism = pushOptions.PackbuilderDegreeOfParallelism,
                                           RemoteCallbacks = gitCallbacks,
+                                          proxy_opts = new GitProxyOptions () { Version = 1, Type = ProxyTypes.None },
                                       });
             }
         }

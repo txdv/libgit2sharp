@@ -1213,6 +1213,7 @@ namespace LibGit2Sharp.Core
             git_remote* remote,
             GitDirection direction,
             ref GitRemoteCallbacks callbacks,
+            ref GitProxyOptions proxy_opts,
             ref GitStrArray custom_headers);
 
         [DllImport(libgit2)]

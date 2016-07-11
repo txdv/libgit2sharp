@@ -55,6 +55,7 @@ namespace LibGit2Sharp
                 {
                     RemoteCallbacks = gitCallbacks,
                     download_tags = Proxy.git_remote_autotag(remoteHandle),
+                    proxy_opts = new GitProxyOptions () { Version = 1, Type = ProxyTypes.None },
                 };
 
                 if (options.TagFetchMode.HasValue)

@@ -643,7 +643,8 @@ namespace LibGit2Sharp
                     gitCallbacks = callbacks.GenerateCallbacks();
                 }
 
-                Proxy.git_remote_connect(remoteHandle, GitDirection.Fetch, ref gitCallbacks);
+                GitProxyOptions proxyOptions = new GitProxyOptions () { Version = 1, Type = ProxyTypes.None };
+                Proxy.git_remote_connect(remoteHandle, GitDirection.Fetch, ref proxyOptions, ref gitCallbacks);
                 return Proxy.git_remote_ls(null, remoteHandle);
             }
         }
@@ -731,7 +732,10 @@ namespace LibGit2Sharp
                     Version = 1,
                     Bare = options.IsBare ? 1 : 0,
                     CheckoutOpts = gitCheckoutOptions,
-                    FetchOpts = new GitFetchOptions { RemoteCallbacks = gitRemoteCallbacks },
+                    FetchOpts = new GitFetchOptions {
+                        RemoteCallbacks = gitRemoteCallbacks,
+                        proxy_opts = new GitProxyOptions () { Version = 1, Type = ProxyTypes.None },
+                    }
                 };
 
                 string clonedRepoPath;

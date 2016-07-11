@@ -356,6 +356,8 @@
     <Compile Include="Commands\Remove.cs" />
     <Compile Include="Commands\Checkout.cs" />
     <Compile Include="SignatureInfo.cs" />
+    <Compile Include="ProxyTypes.cs" />
+    <Compile Include="Core\GitProxyOptions.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="CustomDictionary.xml" />
