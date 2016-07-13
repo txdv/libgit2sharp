@@ -245,6 +245,7 @@ namespace LibGit2Sharp.Core
     internal unsafe struct git_diff_file
     {
         public git_oid Id;
+        public int IdAbbrev;
         public char* Path;
         public Int64 Size;
         public GitDiffFlags Flags;
