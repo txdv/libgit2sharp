@@ -226,7 +226,7 @@ namespace LibGit2Sharp.Core
                     Reference reference;
                     using (var refHandle = new ReferenceHandle(refPtr, true))
                     {
-                        reference = Reference.BuildFromPtr<Reference>(refHandle, repo);
+                        reference = Reference.BuildFromPtr(refHandle, repo);
                     }
                     yield return new Branch(repo, reference, reference.CanonicalName);
                 }

@@ -168,7 +168,7 @@ namespace LibGit2Sharp.Core
 
             string backupName = backupRefsNamespace + oldRef.CanonicalName.Substring("refs/".Length);
 
-            if (repo.Refs.Resolve<Reference>(backupName) != null)
+            if (repo.Refs.Resolve(backupName) != null)
             {
                 throw new InvalidOperationException(String.Format(CultureInfo.InvariantCulture,
                                                                   "Can't back up reference '{0}' - '{1}' already exists",

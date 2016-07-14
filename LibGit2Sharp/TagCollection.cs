@@ -39,7 +39,7 @@ namespace LibGit2Sharp
             {
                 Ensure.ArgumentNotNullOrEmptyString(name, "name");
                 var canonicalName = NormalizeToCanonicalName(name);
-                var reference = repo.Refs.Resolve<Reference>(canonicalName);
+                var reference = repo.Refs.Resolve(canonicalName);
                 return reference == null ? null : new Tag(repo, reference, canonicalName);
             }
         }

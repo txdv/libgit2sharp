@@ -1873,7 +1873,7 @@ namespace LibGit2Sharp
             using (var objH = handles.Item1)
             using (var refH = handles.Item2)
             {
-                reference = refH.IsNull ? null : Reference.BuildFromPtr<Reference>(refH, this);
+                reference = refH.IsNull ? null : Reference.BuildFromPtr(refH, this);
                 obj = GitObject.BuildFrom(this, Proxy.git_object_id(objH), Proxy.git_object_type(objH), PathFromRevparseSpec(revision));
             }
         }

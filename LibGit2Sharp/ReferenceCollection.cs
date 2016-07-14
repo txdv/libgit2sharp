@@ -39,7 +39,7 @@ namespace LibGit2Sharp
         /// <returns>The resolved <see cref="LibGit2Sharp.Reference"/> if it has been found, null otherwise.</returns>
         public virtual Reference this[string name]
         {
-            get { return Resolve<Reference>(name); }
+            get { return Resolve(name); }
         }
 
         #region IEnumerable<Reference> Members
@@ -127,7 +127,7 @@ namespace LibGit2Sharp
                 using (ReferenceHandle handle = Proxy.git_reference_symbolic_create(repo.Handle, name, canonicalRefNameOrObjectish, allowOverwrite,
                     logMessage))
                 {
-                    return Reference.BuildFromPtr<Reference>(handle, repo);
+                    return Reference.BuildFromPtr(handle, repo);
                 }
             }
 
@@ -193,7 +193,7 @@ namespace LibGit2Sharp
 
             using (ReferenceHandle handle = Proxy.git_reference_create(repo.Handle, name, targetId, allowOverwrite, logMessage))
             {
-                return (DirectReference)Reference.BuildFromPtr<Reference>(handle, repo);
+                return (DirectReference)Reference.BuildFromPtr(handle, repo);
             }
         }
 
@@ -251,7 +251,7 @@ namespace LibGit2Sharp
                                                                                     allowOverwrite,
                                                                                     logMessage))
             {
-                return (SymbolicReference)Reference.BuildFromPtr<Reference>(handle, repo);
+                return (SymbolicReference)Reference.BuildFromPtr(handle, repo);
             }
         }
 
@@ -346,7 +346,7 @@ namespace LibGit2Sharp
             using (ReferenceHandle referencePtr = RetrieveReferencePtr(reference.CanonicalName))
             using (ReferenceHandle handle = Proxy.git_reference_rename(referencePtr, newName, allowOverwrite, logMessage))
             {
-                return Reference.BuildFromPtr<Reference>(handle, repo);
+                return Reference.BuildFromPtr(handle, repo);
             }
         }
 
@@ -434,7 +434,7 @@ namespace LibGit2Sharp
             return Rename(reference, newName, null, allowOverwrite);
         }
 
-        internal T Resolve<T>(string name) where T : Reference
+        internal Reference Resolve(string name)
         {
             Ensure.ArgumentNotNullOrEmptyString(name, "name");
 
@@ -442,7 +442,7 @@ namespace LibGit2Sharp
             {
                 return referencePtr == null
                     ? null
-                    : Reference.BuildFromPtr<T>(referencePtr, repo);
+                    : Reference.BuildFromPtr(referencePtr, repo);
             }
         }
 
@@ -471,7 +471,7 @@ namespace LibGit2Sharp
             using (ReferenceHandle referencePtr = RetrieveReferencePtr(directRef.CanonicalName))
             using (ReferenceHandle handle = Proxy.git_reference_set_target(referencePtr, targetId, logMessage))
             {
-                return Reference.BuildFromPtr<Reference>(handle, repo);
+                return Reference.BuildFromPtr(handle, repo);
             }
         }
 
@@ -597,7 +597,7 @@ namespace LibGit2Sharp
             using (ReferenceHandle referencePtr = RetrieveReferencePtr(symbolicRef.CanonicalName))
             using (ReferenceHandle handle = Proxy.git_reference_symbolic_set_target(referencePtr, targetRef.CanonicalName, logMessage))
             {
-                return Reference.BuildFromPtr<Reference>(handle, repo);
+                return Reference.BuildFromPtr(handle, repo);
             }
         }
 

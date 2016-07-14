@@ -37,12 +37,12 @@ namespace LibGit2Sharp
         }
 
         // This overload lets public-facing methods avoid having to use the pointers directly
-        internal static unsafe T BuildFromPtr<T>(ReferenceHandle handle, Repository repo) where T : Reference
+        internal static unsafe Reference BuildFromPtr(ReferenceHandle handle, Repository repo)
         {
-            return BuildFromPtr<T>((git_reference*) handle.Handle, repo);
+            return BuildFromPtr((git_reference*) handle.Handle, repo);
         }
 
-        internal static unsafe T BuildFromPtr<T>(git_reference* handle, Repository repo) where T : Reference
+        internal static unsafe Reference BuildFromPtr(git_reference* handle, Repository repo)
         {
             GitReferenceType type = Proxy.git_reference_type(handle);
             string name = Proxy.git_reference_name(handle);
@@ -68,7 +68,7 @@ namespace LibGit2Sharp
                     throw new LibGit2SharpException("Unable to build a new reference from a type '{0}'.", type);
             }
 
-            return reference as T;
+            return reference as Reference;
         }
 
         /// <summary>
